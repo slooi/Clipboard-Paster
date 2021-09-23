@@ -32,11 +32,10 @@ function checkClipboard() {
 	// Paste
 	document.execCommand("Paste");
 
-	//##################################################3
 	// read the clipboard contents from the helperdiv
 	var newCC = helperdiv.innerText;
 	if (newCC !== oldCC) {
-		// change in clipboard occurred:
+		// if change in clipboard occurred:
 		console.log(newCC);
 		oldCC = newCC;
 
