@@ -1,4 +1,4 @@
-console.log("cotent script loaded!");
+console.log("Clipbaord Paster content-script loaded!");
 
 chrome.runtime.onMessage.addListener(({ newCC }, sender, sendResponse) => {
 	const message = newCC;
@@ -9,7 +9,6 @@ chrome.runtime.onMessage.addListener(({ newCC }, sender, sendResponse) => {
 
 function pasteTextIntoDeepL(message) {
 	if (window.location.href.includes("https://www.deepl.com/en/translator")) {
-		console.log("ALMONDO ALMONDO");
 		changeDeepLTextArea(message);
 	}
 }
