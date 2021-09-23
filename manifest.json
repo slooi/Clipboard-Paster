@@ -26,5 +26,5 @@
 			"js": ["content-script.js"]
 		}
 	],
-	"permissions": ["clipboardRead", "clipboardWrite", "activeTab", "tabs"]
+	"permissions": ["clipboardRead", "clipboardWrite"]
 }
