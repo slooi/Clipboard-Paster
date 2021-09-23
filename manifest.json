@@ -3,6 +3,9 @@
 	"description": "Pastes contents of clipboard when it changes",
 	"version": "1.0",
 	"manifest_version": 3,
+	"background": {
+		"service_worker": "background.js"
+	},
 	"action": {
 		"default_title": "Clipboard Paster",
 		"default_popup": "popup.html",
@@ -12,9 +15,21 @@
 			"64": "./images/favicon.png"
 		}
 	},
-	"icon": {
+	"icons": {
 		"16": "./images/favicon.png",
 		"32": "./images/favicon.png",
 		"64": "./images/favicon.png"
-	}
+	},
+	"content_scripts": [
+		{
+			"matches": ["<all_urls>"],
+			"js": ["content-script.js"]
+		}
+	],
+	"permissions": [
+		"clipboardRead",
+		"clipboardWrite",
+		"clipboard-read",
+		"clipboard-write"
+	]
 }
