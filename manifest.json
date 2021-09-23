@@ -2,11 +2,12 @@
 	"name": "Clipboard Paster",
 	"description": "Pastes contents of clipboard when it changes",
 	"version": "1.0",
-	"manifest_version": 3,
+	"manifest_version": 2,
 	"background": {
-		"service_worker": "background.js"
+		"scripts": ["background.js"],
+		"persistent": false
 	},
-	"action": {
+	"page_action": {
 		"default_title": "Clipboard Paster",
 		"default_popup": "popup.html",
 		"default_icon": {
@@ -29,7 +30,9 @@
 	"permissions": [
 		"clipboardRead",
 		"clipboardWrite",
-		"clipboard-read",
-		"clipboard-write"
+		"activeTab",
+		"tabs"
+		// "storage",
+		// "contextMenus"
 	]
 }

@@ -1,34 +1,44 @@
 console.log("Background.js loaded");
-// console.log("document:", document);
-chrome.runtime.onInstalled.addListener(() => {
-	// chrome.contextMenus.create({
-	// 	id: "sampleContextMenu",
-	// 	title: "Sample Context Menu",
-	// 	contexts: ["selection"],
-	// });
-	console.log(document);
-	console.log(document);
-	console.log(document);
-	console.log(document);
-	console.log(document);
-	console.log(document);
-	console.log(document);
-	console.log(document);
-	setTimeout(() => {
-		var t = document.createElement("input");
-		document.body.appendChild(t);
-		t.focus();
-		document.execCommand("paste");
-		var clipboardText = t.value; //this is your clipboard data
-		copyTextToClipboard("Hi" + clipboardText); //prepends "Hi" to the clipboard text
-		document.body.removeChild(t);
-	}, 2000);
-	console.log(navigator);
-	console.log(navigator);
-	console.log(navigator);
-	console.log(navigator.clipboard);
-	// navigator.clipboard.readText().then((clipText) => console.log(clipText));
+
+var oldCC;
+chrome.runtime.onInstalled.addListener(function () {
+	setInterval(checkClipboard, 1000 / 8);
 });
-// chrome.webNavigation.onCompleted.addListener(() => {
-// 	console.info("The user has loaded my favorite website!");
-// });
+
+function checkClipboard() {
+	// Create div
+	var helperdiv = document.createElement("div");
+	document.body.appendChild(helperdiv);
+	helperdiv.contentEditable = true;
+
+	// Focus on div
+	var range = document.createRange();
+	range.selectNode(helperdiv);
+	window.getSelection().removeAllRanges();
+	window.getSelection().addRange(range);
+	helperdiv.focus();
+
+	// Paste
+	document.execCommand("Paste");
+
+	//##################################################3
+	// read the clipboard contents from the helperdiv
+	var newCC = helperdiv.innerText;
+	if (newCC !== oldCC) {
+		console.log(newCC);
+		oldCC = newCC;
+
+		// Callback
+		pasteIntoPage(newCC);
+	}
+}
+
+// Communicate with the content scripts
+// If in deepl website, paste into textarea
+function pasteIntoPage(newCC) {
+	chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+		console.log(tabs);
+		chrome.tabs.sendMessage;
+		chrome.tabs.sendMessage(tabs[0].id, { newCC });
+	});
+}
