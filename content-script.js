@@ -8,6 +8,8 @@ chrome.runtime.onMessage.addListener(({ newCC }, sender, sendResponse) => {
 });
 
 function pasteTextIntoDeepL(message) {
+	console.log("Clipboard Paster received clipboard content:");
+	console.log(message);
 	if (window.location.href.includes("https://www.deepl.com/en/translator")) {
 		changeDeepLTextArea(message);
 	}
