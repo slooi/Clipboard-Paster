@@ -12,8 +12,13 @@ chrome.browserAction.onClicked.addListener((tab) => {
 	console.log(tab);
 	console.log("tab.id");
 	console.log(tab.id);
-	tabId = tab.id;
-	chrome.browserAction.setBadgeText({ text: "ON" });
+	if (tabId !== "none") {
+		tabId = "none";
+		chrome.browserAction.setBadgeText({ text: "" });
+	} else {
+		tabId = tab.id;
+		chrome.browserAction.setBadgeText({ text: "ON" });
+	}
 });
 
 function checkClipboard() {
