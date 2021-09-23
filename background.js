@@ -1,6 +1,7 @@
 console.log("Background.js loaded");
 
 var oldCC;
+var tabId = "none";
 
 chrome.runtime.onInstalled.addListener(function () {
 	setInterval(checkClipboard, 1000 / 8);
@@ -15,6 +16,15 @@ chrome.runtime.onInstalled.addListener(function () {
 // 		});
 // 	}
 // );
+
+chrome.browserAction.onClicked.addListener((tab) => {
+	console.log("tab");
+	console.log(tab);
+	console.log("tab.id");
+	console.log(tab.id);
+	tabId = tab.id;
+	chrome.browserAction.setBadgeText({ text: "ON" });
+});
 
 function checkClipboard() {
 	// Create div
@@ -36,6 +46,7 @@ function checkClipboard() {
 	// read the clipboard contents from the helperdiv
 	var newCC = helperdiv.innerText;
 	if (newCC !== oldCC) {
+		// change in clipboard occurred:
 		console.log(newCC);
 		oldCC = newCC;
 
@@ -47,13 +58,18 @@ function checkClipboard() {
 // Communicate with the content scripts
 // If in deepl website, paste into textarea
 function pasteIntoPage(newCC) {
-	// console.log(activeTabs);
+	// console.log(newCC);
 	// for (let tab in activeTabs) {
 	// 	chrome.tabs.sendMessage(tab.id, { newCC });
 	// }
-	chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-		console.log(tabs);
-		chrome.tabs.sendMessage;
-		chrome.tabs.sendMessage(tabs[0].id, { newCC });
-	});
+	if (tabId !== "none") {
+		chrome.tabs.sendMessage(tabId, { newCC });
+	}
+	// chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+	// 	console.log("tabs");
+	// 	console.log(tabs);
+	// 	console.log("newCC");
+	// 	console.log(newCC);
+	// 	chrome.tabs.sendMessage(tabId, { newCC });
+	// });
 }
