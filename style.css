@@ -1,0 +1,28 @@
+*,
+html,
+body {
+	margin: 0;
+	padding: 0;
+	/* border: 0; */
+	width: 70px;
+	height: 40px;
+}
+
+button {
+	width: 50px;
+	height: 20px;
+	/* border-radius: 2px;
+	background-color: rgb(233, 37, 37);
+	box-shadow: 0px 5px rgb(189, 13, 13); */
+	margin: 0 auto;
+	/* color: black; */
+}
+
+#content {
+	display: flex;
+	align-items: center;
+}
+
+button.aftter {
+	content: "New text";
+}

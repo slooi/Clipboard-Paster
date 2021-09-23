@@ -1,9 +1,20 @@
 console.log("Background.js loaded");
 
 var oldCC;
+
 chrome.runtime.onInstalled.addListener(function () {
 	setInterval(checkClipboard, 1000 / 8);
 });
+
+// chrome.runtime.onMessage.addListener(
+// 	({ toggleActive }, sender, sendResponse) => {
+// 		console.log("BACKGROUND GOT REQUEST! :", toggleActive);
+// 		chrome.tabs.query({ currentWindow: true, active: true }, (tabs) => {
+// 			activeTabs.length = 0;
+// 			activeTabs.push(tabs[0]);
+// 		});
+// 	}
+// );
 
 function checkClipboard() {
 	// Create div
@@ -36,6 +47,10 @@ function checkClipboard() {
 // Communicate with the content scripts
 // If in deepl website, paste into textarea
 function pasteIntoPage(newCC) {
+	// console.log(activeTabs);
+	// for (let tab in activeTabs) {
+	// 	chrome.tabs.sendMessage(tab.id, { newCC });
+	// }
 	chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
 		console.log(tabs);
 		chrome.tabs.sendMessage;
