@@ -9,7 +9,6 @@
 	},
 	"browser_action": {
 		"default_title": "Clipboard Paster",
-		// "default_popup": "popup.html",
 		"default_icon": {
 			"16": "./images/favicon.png",
 			"32": "./images/favicon.png",
@@ -27,12 +26,5 @@
 			"js": ["content-script.js"]
 		}
 	],
-	"permissions": [
-		"clipboardRead",
-		"clipboardWrite",
-		"activeTab",
-		"tabs"
-		// "storage",
-		// "contextMenus"
-	]
+	"permissions": ["clipboardRead", "clipboardWrite", "activeTab", "tabs"]
 }

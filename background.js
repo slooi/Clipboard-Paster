@@ -7,16 +7,6 @@ chrome.runtime.onInstalled.addListener(function () {
 	setInterval(checkClipboard, 1000 / 8);
 });
 
-// chrome.runtime.onMessage.addListener(
-// 	({ toggleActive }, sender, sendResponse) => {
-// 		console.log("BACKGROUND GOT REQUEST! :", toggleActive);
-// 		chrome.tabs.query({ currentWindow: true, active: true }, (tabs) => {
-// 			activeTabs.length = 0;
-// 			activeTabs.push(tabs[0]);
-// 		});
-// 	}
-// );
-
 chrome.browserAction.onClicked.addListener((tab) => {
 	console.log("tab");
 	console.log(tab);
@@ -58,18 +48,7 @@ function checkClipboard() {
 // Communicate with the content scripts
 // If in deepl website, paste into textarea
 function pasteIntoPage(newCC) {
-	// console.log(newCC);
-	// for (let tab in activeTabs) {
-	// 	chrome.tabs.sendMessage(tab.id, { newCC });
-	// }
 	if (tabId !== "none") {
 		chrome.tabs.sendMessage(tabId, { newCC });
 	}
-	// chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-	// 	console.log("tabs");
-	// 	console.log(tabs);
-	// 	console.log("newCC");
-	// 	console.log(newCC);
-	// 	chrome.tabs.sendMessage(tabId, { newCC });
-	// });
 }
