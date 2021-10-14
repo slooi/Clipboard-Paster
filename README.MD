@@ -4,8 +4,8 @@
 
 # Instructions
 
-1. Download this repository
-2. Unzip this repository
+1. Download this repository (click green button with the text "Code", then click "Download Zip")
+2. Unzip the downloaded folder
 3. Open up your chrome extensions
 4. Turn on dev mode
 5. Click "Load unpacked"
